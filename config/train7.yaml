@@ -1,0 +1,67 @@
+log:
+  log_dir: 'log3'
+  chkpt_dir: 'chkpt'
+  start_checkpoint:  /home_old/jdq/PG/chkpt/sfm_st3/epoch=0-step=22553.ckpt
+  test_dir: 'test'
+  test_vis_dir: 'test_vis'
+  test_checkpoint: /home_old/jdq/PG/chkpt/result/sfm521.ckpt
+# arcface:
+#   chkpt_path: 'preprocess/model_mobilefacenet.pth'
+#   vector_size: 512
+
+# data:
+#   dataset_dir: '/data/jdq/face_dataset/faceshiter/FFHQ'
+#   valset_dir: '/data/jdq/face_dataset/faceshiter/FFHQ'
+
+data:
+  dataset_list: '/data/jdq/face_dataset/pg_data/landmark_list.txt'
+  valset_dir : "/data/jdq/dbs/AFLW2000-3D/image_align/"
+  valset_lfw_dir : "/data/jdq/face_dataset/pg_data/lfw_224x224/"
+  valset_cfp_dir : "/data/jdq/face_dataset/pg_data/cfp_fp_224x224/"
+  valset_age_dir : "/data/jdq/face_dataset/pg_data/agedb_30_224x224/"
+  valset_ytf_dir : "/data/jdq/face_dataset/pg_data/ytf/image/"
+  train_300WLP_dir: "/data/jdq/face_dataset/300W_LP/image_align/"
+  morphable_model: 'saved_3dmm/s3dmm.npz'
+  test_dir: /home_old/jdq/PG/vis_data_aligned2/
+  valset_micc_dir: /data/jdq/face_dataset/pg_data/micc_aligned/
+  micc_obj_root: '/data/jdq/florence'
+
+model:
+  learning_rate: 2e-5
+  net_depth: 50
+  drop_ratio: 0.5
+
+  beta1: 0
+  beta2: 0.999
+
+  batch_size: 10
+
+  num_workers: 40
+  grad_clip: 0.0
+
+weight:
+  para_regular_shape: 0.0004
+  para_regular_exp: 0.5
+  pixel_loss: 20
+  para_regular_tex: 0.5
+  perceptual_loss: 0
+  fr_loss: 40
+  kl_loss: 40
+  para_res_shape: 0.05
+  smooth_loss: 1000
+  sym_loss: 0.2
+  basis_regular_loss: 500
+  center_loss: 1
+  basis_res_loss: 50
+
+val:
+  prn_rst: './propressing/prn_aflw_rst_not_align.npz'
+  ddfa_rst: './propressing/3ddfa_aflw_rst.npz'
+
+
+output:
+  image_size: 224
+
+stage: test
+
+morphable_model: s3dmm
